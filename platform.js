@@ -16,8 +16,10 @@
   };
   const liveSourceOrigin='https://hwangbl.github.io';
   const useLiveSources=location.origin===liveSourceOrigin;
-  const sharedThemeUrl=new URL('hku-labs.css',document.baseURI).href;
-  const bridgeUrl=new URL('lab-bridge.js',document.baseURI).href;
+  const releaseVersion=document.querySelector('meta[name="physics-release"]')?.content;
+  function platformAsset(name) {const url=new URL(name,document.baseURI);if(releaseVersion)url.searchParams.set('v',releaseVersion);return url.href;}
+  const sharedThemeUrl=platformAsset('hku-labs.css');
+  const bridgeUrl=platformAsset('lab-bridge.js');
   function labUrl(lab,hash='') {
     const url=useLiveSources
       ? new URL(`${sourceRepositories[lab.id]}/index.html`,`${liveSourceOrigin}/`)

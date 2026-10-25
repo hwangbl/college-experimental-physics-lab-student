@@ -242,3 +242,44 @@ body[data-platform-theme="hku"] .hero-copy :is(.primary, .primary-button):not(.d
   border-color: #fff;
   color: #10405c;
 }
+
+/* Young's current student release uses a navy horizontal module bar inside
+ * a white site header. Scope this exception to that actual markup so the
+ * white navigation surfaces in the resistance, rings and polarization labs
+ * keep their dark, readable labels. */
+body[data-platform-theme="hku"] .sidebar.site-header .module-nav .nav-item,
+body[data-platform-theme="hku"] .sidebar.site-header .module-nav .nav-item span {
+  color: #fff;
+}
+body[data-platform-theme="hku"] .sidebar.site-header .module-nav .nav-item:hover,
+body[data-platform-theme="hku"] .sidebar.site-header .module-nav .nav-item.active {
+  color: #fff;
+  background: #246891;
+}
+body[data-platform-theme="hku"] .sidebar.site-header .module-nav .nav-item.active {
+  box-shadow: inset 0 -3px #00deff;
+}
+
+/* Both overview copy templates are dark teaching introductions. Explicit
+ * selectors after the general eyebrow/action rules preserve their contrast
+ * when an upstream experiment changes its own header or overview styling. */
+body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) {
+  background-color: #10405c;
+  color: #fff;
+}
+body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) :is(h1, h1 span, h2, h2 em) {
+  color: #fff;
+}
+body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) p {
+  color: #d9e8f1;
+}
+body[data-platform-theme="hku"] .hero-copy .eyebrow,
+body[data-platform-theme="hku"] .hero-info .section-kicker {
+  color: #00deff;
+}
+body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) :is(.text-btn, .text-button):not(.danger):not(.error):not(.warning) {
+  color: #00deff;
+}
+body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) :is(.text-btn, .text-button):not(.danger):not(.error):not(.warning):hover {
+  color: #fff;
+}
