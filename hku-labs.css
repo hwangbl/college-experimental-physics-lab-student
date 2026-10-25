@@ -25,6 +25,30 @@ body[data-platform-theme="hku"] {
   font-family: var(--font);
 }
 
+/* Hall's page keeps its native navy navigation and scientific instrument colors. */
+body[data-platform-theme="hku"][data-platform-lab="hall"] .brand-mark {
+  background: transparent;
+}
+body[data-platform-theme="hku"][data-platform-lab="hall"] :is(.brand strong, .hero h1, .page-title h1) {
+  font-family: var(--font);
+}
+body[data-platform-theme="hku"][data-platform-lab="hall"] .page-title h1 {
+  color: #10405c;
+}
+body[data-platform-theme="hku"][data-platform-lab="hall"] .hero .eyebrow {
+  color: #00deff;
+}
+body[data-platform-theme="hku"][data-platform-lab="hall"] .hero .primary:not(.danger):not(.error):not(.warning) {
+  background: #00deff;
+  border-color: #00deff;
+  color: #10405c;
+}
+body[data-platform-theme="hku"][data-platform-lab="hall"] .hero .primary:not(.danger):not(.error):not(.warning):hover {
+  background: #fff;
+  border-color: #fff;
+  color: #10405c;
+}
+
 /* The data workbench has its own namespaced interface tokens. */
 body[data-platform-theme="hku"] .yd {
   --yd-ink: #242424;
