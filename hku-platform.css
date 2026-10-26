@@ -45,3 +45,54 @@ dialog{border-radius:0;background:#fff;border:0;border-top:5px solid #10405c;pad
   .lab-nav a,.lab-mode .lab-nav a{min-width:0;padding:11px 8px;font-size:11px;gap:6px;letter-spacing:0}
   .lab-nav .lab-num{font-size:9px;min-width:12px}
 }
+
+/* Inside an experiment, one compact toolbar replaces the homepage masthead. */
+.lab-mode .academic-utility,.lab-mode .sidebar,.lab-mode .topbar{display:none}
+.lab-mode .shell{margin:0}
+.lab-mode main{height:100dvh;min-height:0}
+.lab-mode .lab-workspace{--workspace-toolbar-height:52px;height:100dvh;min-height:0;background:#fff}
+.lab-mode .lab-toolbar{position:relative;z-index:20;height:var(--workspace-toolbar-height);min-height:var(--workspace-toolbar-height);padding:0 28px;gap:20px;border-top:3px solid #10405c;border-bottom:1px solid #d7e1e6;background:#f6f8f9}
+.lab-toolbar-left{min-width:0;gap:20px}
+.workspace-home{display:inline-flex;align-items:center;gap:10px;color:#10405c;font-size:13px;font-weight:600;white-space:nowrap}
+.workspace-home:hover{color:#007c9b}
+.workspace-mark{font:38px/1 Georgia,serif;color:#10405c}
+.lab-mode .toolbar-divider{display:block;height:20px;border-color:#ccdbe3}
+.lab-mode .lab-toolbar select{width:220px;max-width:220px;min-width:0;height:32px;padding:4px 28px 4px 10px;font-size:13px;border:1px solid #bdced8;background:#fff}
+.lab-mode .lab-actions{gap:12px;flex-shrink:0}
+.lab-mode .lab-actions #focus-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:32px;padding:4px 12px;font-size:12px;font-weight:400;background:transparent;color:#10405c;border-color:#bdced8;white-space:nowrap}
+.lab-mode .lab-actions #focus-button[aria-pressed="true"]{background:#10405c;color:#fff;border-color:#10405c}
+.lab-mode .lab-actions #focus-button:hover{background:#e3f4f8;color:#10405c}
+.workspace-more{position:relative;font-size:12px;color:#10405c}
+.workspace-more summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:32px;padding:4px 8px;cursor:pointer;border:1px solid transparent}
+.workspace-more summary::-webkit-details-marker{display:none}
+.workspace-more summary>span:first-child{font:bold 21px/1 Arial;letter-spacing:1px;transform:translateY(-4px)}
+.workspace-more summary:hover,.workspace-more[open] summary{background:#e6eef2;border-color:#bdced8}
+.workspace-menu{position:absolute;right:0;top:calc(100% + 9px);width:176px;padding:6px;background:#fff;border:1px solid #bdced8;box-shadow:0 8px 24px #10405c1a}
+.lab-mode .workspace-menu :is(a,button){display:flex;align-items:center;gap:12px;width:100%;min-height:40px;padding:8px 12px;text-align:left;font-size:12px;border:0;background:#fff;color:#10405c;white-space:nowrap}
+.workspace-menu :is(a,button)>span{width:18px;text-align:center;font-size:17px;color:#356784}
+.lab-mode .workspace-menu :is(a,button):hover{background:#edf5f8}
+.workspace-menu [hidden]{display:none!important}
+.lab-mode .frame-loading{inset:var(--workspace-toolbar-height) 0 0}
+.lab-mode :is(.workspace-home,.workspace-more summary,#focus-button,#lab-switch):focus-visible{outline:2px solid #007c9b;outline-offset:3px}
+.focus-mode .lab-workspace{--workspace-toolbar-height:42px}
+.focus-mode .workspace-home,.focus-mode .toolbar-divider{display:none}
+@media(max-width:800px){
+  .lab-mode .lab-toolbar{padding:0 18px;gap:12px}
+  .lab-mode .lab-toolbar-left{gap:12px}
+  .workspace-home-label{display:none}
+  .lab-mode .lab-toolbar select{width:210px;max-width:100%}
+}
+@media(max-width:500px){
+  .lab-mode .lab-workspace{--workspace-toolbar-height:50px}
+  .lab-mode .lab-toolbar{padding:0 12px;gap:8px}
+  .lab-mode .lab-toolbar-left{flex:1;gap:9px}
+  .lab-mode .toolbar-divider{display:none}
+  .workspace-mark{font-size:32px}
+  .lab-mode .lab-toolbar select{flex:1;width:160px;max-width:190px;height:32px;padding:4px 20px 4px 8px;font-size:12px}
+  .lab-mode .lab-actions{gap:6px}
+  .lab-mode .lab-actions #focus-button{width:32px;height:32px;padding:0;font-size:18px}
+  .focus-label,.more-label{display:none}
+  .workspace-more summary{width:30px;padding:3px}
+  .workspace-menu{width:170px}
+  .lab-mode.focus-mode .lab-workspace{--workspace-toolbar-height:42px}
+}

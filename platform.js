@@ -78,7 +78,7 @@
     currentLab=lab;
     records[lab.id]={...records[lab.id],lastVisited:Date.now()};save();
     const url=labUrl(lab,records[lab.id].hash);
-    $('#main').innerHTML=`<section class="lab-workspace" aria-label="${lab.name}实验工作区"><div class="lab-toolbar"><div class="lab-toolbar-left"><button class="lab-back" id="lab-back">← 实验总览</button><span class="toolbar-divider"></span><strong>${lab.name}</strong><select id="lab-switch" aria-label="切换实验">${labs.map(l=>`<option value="${l.id}" ${l.id===lab.id?'selected':''}>${l.n} · ${l.name}</option>`).join('')}</select></div><div class="lab-actions"><button id="focus-button" aria-pressed="false">⛶ 专注模式</button><a href="${url}" target="_blank" rel="noopener" id="standalone-link"><span class="standalone-text">独立打开 </span>↗</a></div></div><div class="frame-loading" id="frame-loading"><div><div class="spinner"></div><span id="frame-loading-label">正在准备${lab.name}实验…</span><div id="load-note" class="load-note"></div></div></div><iframe class="lab-frame" id="lab-frame" title="${lab.name}完整交互实验" allow="fullscreen" src="${url}"></iframe></section>`;
+    $('#main').innerHTML=`<section class="lab-workspace" aria-label="${lab.name}实验工作区"><div class="lab-toolbar" role="region" aria-label="实验工作区工具栏"><div class="lab-toolbar-left"><a class="workspace-home" href="#home" aria-label="返回实验总览" title="返回实验总览"><span class="workspace-mark" aria-hidden="true">∿</span><span class="workspace-home-label">实验中心</span></a><span class="toolbar-divider" aria-hidden="true"></span><select id="lab-switch" aria-label="切换实验">${labs.map(l=>`<option value="${l.id}" ${l.id===lab.id?'selected':''}>${l.n} · ${l.name}</option>`).join('')}</select></div><div class="lab-actions"><button id="focus-button" aria-pressed="false" title="专注模式"><span aria-hidden="true">⛶</span><span class="focus-label">专注模式</span></button><details class="workspace-more" id="workspace-more"><summary aria-label="更多实验工具" title="更多实验工具"><span aria-hidden="true">···</span><span class="more-label">更多</span></summary><div class="workspace-menu"><button id="native-lab-help" hidden><span aria-hidden="true">?</span>实验指南</button><button id="native-lab-sources" hidden><span aria-hidden="true">▤</span>课程资料</button><a href="#recent"><span aria-hidden="true">◷</span>最近学习</a><button id="workspace-help"><span aria-hidden="true">?</span>平台帮助</button><a href="${url}" target="_blank" rel="noopener" id="standalone-link"><span aria-hidden="true">↗</span>独立打开实验</a><button id="native-lab-reset" hidden><span aria-hidden="true">↺</span>重置学习记录</button></div></details></div></div><div class="frame-loading" id="frame-loading"><div><div class="spinner"></div><span id="frame-loading-label">正在准备${lab.name}实验…</span><div id="load-note" class="load-note"></div></div></div><iframe class="lab-frame" id="lab-frame" title="${lab.name}完整交互实验" allow="fullscreen" src="${url}"></iframe></section>`;
     frame=$('#lab-frame');
     const openedFrame=frame;
     let attempt=0;
@@ -104,16 +104,17 @@
       clearTimeout(frameTimer);
       try {
         if(useLiveSources)await connectLiveLab(openedFrame,lab);
+        connectLabTools(openedFrame,lab);
         if(isCurrent()&&loadedAttempt===attempt)$('#frame-loading')?.setAttribute('hidden','');
       }catch(error){if(loadedAttempt===attempt)showFailure('原实验或统一样式暂时不可用。请重新载入，或直接打开原实验页面。');}
     });
     openedFrame.addEventListener('error',()=>{clearTimeout(frameTimer);showFailure('网络连接失败。请检查连接后重新载入。');});
     frameTimer=setTimeout(()=>showFailure('载入时间较长。你可以重新载入，或直接打开原实验页面。'),12000);
-    $('#lab-back').onclick=()=>{location.hash='home';};
     $('#lab-switch').onchange=e=>{location.hash='lab/'+e.target.value;};
     $('#focus-button').onclick=toggleFocus;
+    $('#workspace-help').onclick=()=>{$('#workspace-more').open=false;openHelp();};
     $('#standalone-link').setAttribute('aria-label',`独立打开${lab.name}实验`);
-    if(document.body.classList.contains('focus-mode')){$('#focus-button').setAttribute('aria-pressed','true');$('#focus-button').textContent='⊡ 退出专注';}
+    updateFocusButton();
   }
   async function connectLiveLab(openedFrame,lab) {
     const expected=new URL(labUrl(lab));
@@ -141,7 +142,21 @@
     }
     captureFrameState();
   }
-  function toggleFocus() {const on=document.body.classList.toggle('focus-mode');const button=$('#focus-button');if(button){button.setAttribute('aria-pressed',String(on));button.textContent=on?'⊡ 退出专注':'⛶ 专注模式';}}
+  function connectLabTools(openedFrame,lab) {
+    const selectors={young:['#helpBtn','#sourcesBtn'],resistance:[],rings:['#helpButton','#openSources'],polarization:[null,'[data-page="sources"]'],oscilloscope:['#help-button',null,'#reset-progress'],hall:['#help-btn']};
+    const doc=openedFrame.contentDocument;
+    for(const [index,id] of ['native-lab-help','native-lab-sources','native-lab-reset'].entries()) {
+      const selector=selectors[lab.id]?.[index],target=selector&&doc?.querySelector(selector),button=$('#'+id);
+      if(!button)continue;
+      button.hidden=!target;
+      button.onclick=()=>{$('#workspace-more').open=false;target?.click();};
+    }
+  }
+  function updateFocusButton() {
+    const on=document.body.classList.contains('focus-mode'),button=$('#focus-button');
+    if(button){button.setAttribute('aria-pressed',String(on));button.setAttribute('aria-label',on?'退出专注模式':'进入专注模式');button.title=on?'退出专注模式（Esc）':'专注模式';button.innerHTML=`<span aria-hidden="true">${on?'⊡':'⛶'}</span><span class="focus-label">${on?'退出专注':'专注模式'}</span>`;}
+  }
+  function toggleFocus() {document.body.classList.toggle('focus-mode');updateFocusButton();}
   function closeMenu() {$('#sidebar').classList.remove('open');$('#sidebar-shade').hidden=true;$('#menu-button').setAttribute('aria-expanded','false');}
   function captureFrameState() {
     if(!frame||!currentLab)return;
@@ -177,7 +192,8 @@
   $('#menu-button').onclick=()=>{const on=$('#sidebar').classList.toggle('open');$('#sidebar-shade').hidden=!on;$('#menu-button').setAttribute('aria-expanded',String(on));};
   $('#sidebar-shade').onclick=closeMenu;
   $('.skip').onclick=e=>{e.preventDefault();$('#main').focus();$('#main').scrollIntoView();};
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.body.classList.contains('focus-mode'))toggleFocus();closeMenu();}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.body.classList.contains('focus-mode'))toggleFocus();const more=$('#workspace-more');if(more)more.open=false;closeMenu();}});
+  document.addEventListener('click',e=>{const more=$('#workspace-more');if(more?.open&&!more.contains(e.target))more.open=false;});
   window.addEventListener('message',e=>{
     if(e.origin!==location.origin||!frame||e.source!==frame.contentWindow||e.data?.id!==currentLab?.id)return;
     if(e.data.type==='physics-lab-escape'){if(document.body.classList.contains('focus-mode'))toggleFocus();return;}

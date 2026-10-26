@@ -6,7 +6,9 @@
   if (!id) return;
   if(window.__physicsLabHubBridge?.id===id){window.__physicsLabHubBridge.report();return;}
   const selectors={young:'#progressText',resistance:'#progress-text',rings:'#progressText',polarization:'#progress-count',oscilloscope:'#progress-text',hall:'.progress-row small'};
-  let timer,last='';
+  const mastheads={rings:'header.site-header > .masthead.site-wrap',polarization:'header.site-header#sidebar > .masthead.page-wrap',oscilloscope:'body.academic-theme > header.academic-masthead',hall:'body > header > .masthead.wrap'};
+  const navigations={young:'#nav',resistance:'.module-nav > nav',rings:'#mainNavigation > .nav-row',polarization:'#main-nav',oscilloscope:'#navigation',hall:'header > nav > .nav-row'};
+  let timer,last='',progressView;
   function snapshot() {
     const data={type:'physics-lab-state',id,hash:location.hash};
     if(id==='hall') {
@@ -24,7 +26,20 @@
   }
   function report() {
     const data=snapshot();
+    if(progressView&&Number.isInteger(data.completed)&&Number.isInteger(data.total)&&data.total>0&&data.total<=50) {
+      const completed=Math.max(0,Math.min(data.completed,data.total));
+      progressView.hidden=false;
+      progressView.querySelector('b').textContent=`${completed} / ${data.total}`;
+      const track=progressView.querySelector('.progress-track');
+      track.setAttribute('aria-valuemax',String(data.total));
+      track.setAttribute('aria-valuenow',String(completed));
+      track.querySelector('i').style.width=`${100*completed/data.total}%`;
+    }
     const serialized=JSON.stringify(data);if(serialized===last)return;last=serialized;
+    const nav=document.querySelector(navigations[id]),active=nav?.querySelector?.('.active');
+    if(active&&nav.scrollWidth>nav.clientWidth) {
+      nav.scrollLeft+=active.getBoundingClientRect().left-nav.getBoundingClientRect().left-(nav.clientWidth-active.getBoundingClientRect().width)/2;
+    }
     window.parent.postMessage(data,location.origin);
   }
   function schedule(){clearTimeout(timer);timer=setTimeout(report,150);}
@@ -34,6 +49,14 @@
     history[method]=function(...args){const result=original.apply(this,args);schedule();return result;};
   }
   function initialize(){
+    const masthead=mastheads[id]&&document.querySelector(mastheads[id]);
+    if(masthead) {
+      progressView=document.createElement('div');
+      progressView.className='platform-lab-progress';
+      progressView.hidden=true;
+      progressView.innerHTML='<div><span>预习进度</span><b></b></div><div class="progress-track" role="progressbar" aria-label="预习进度" aria-valuemin="0"><i></i></div><p>一步一步，把原理变成经验。</p>';
+      masthead.appendChild(progressView);
+    }
     const progress=document.querySelector(selectors[id]);
     if(progress)new MutationObserver(schedule).observe(progress,{childList:true,characterData:true,subtree:true});
     report();

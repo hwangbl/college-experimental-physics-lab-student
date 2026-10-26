@@ -1,5 +1,5 @@
 /*
- * Shared academic chrome for the five preserved experiment applications.
+ * Shared academic chrome for the six preserved experiment applications.
  * The palette and flat surfaces follow the HKU Physics reference. All rules
  * require the platform opt-in attribute; scientific drawings, chart series,
  * instrument controls, validation states and responsive geometry stay local
@@ -306,4 +306,476 @@ body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) :is(.text-btn, .text
 }
 body[data-platform-theme="hku"] :is(.hero-copy, .hero-info) :is(.text-btn, .text-button):not(.danger):not(.error):not(.warning):hover {
   color: #fff;
+}
+
+
+/* Unified experiment masthead and module navigation.
+ * These are the original application nodes; only their presentation changes.
+ * The bridge supplies a separate progress widget where a masthead has none.
+ */
+body[data-platform-theme="hku"] {
+  --platform-header-max: 1440px;
+  --platform-header-pad: 40px;
+}
+body[data-platform-theme="hku"] > :is(.utility, .academic-utility),
+body[data-platform-theme="hku"] > header.site-header > :is(.utility, .site-utility, .academic-utility),
+body[data-platform-theme="hku"] .app-shell > .topbar,
+body[data-platform-theme="hku"] .main-shell > .topbar.route-bar,
+body[data-platform-theme="hku"][data-platform-lab="resistance"] main > .topbar {
+  display: none;
+}
+body[data-platform-theme="hku"] > header.site-header,
+body[data-platform-theme="hku"] > header.sidebar.site-header {
+  position: relative;
+  inset: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  box-shadow: none;
+  transform: none;
+}
+body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 174px;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: var(--platform-header-max);
+  height: auto;
+  min-height: 120px;
+  margin: 0 auto;
+  padding: 22px var(--platform-header-pad);
+  border: 0;
+  background: #fff;
+  box-shadow: none;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand) {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  color: #10405c;
+  font: 650 30px/1.3 var(--font);
+  letter-spacing: .1em;
+  white-space: nowrap;
+  text-decoration: none;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+  display: block;
+  color: #10405c;
+  font: 650 28px/1.3 var(--font);
+  letter-spacing: .06em;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand small, .brand-en, .academic-brand small) {
+  display: block;
+  margin: 5px 0 0;
+  color: #356784;
+  font: 500 9px/1.4 Arial, sans-serif;
+  letter-spacing: .2em;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .brandmark, .academic-mark) {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 56px;
+  height: 59px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 4px solid #00deff;
+  border-radius: 0;
+  background: #10405c;
+  color: #fff;
+  font: 49px/1 Georgia, serif;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) .brandmark::after {
+  display: none;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .academic-mark) svg {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.3;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) .brand-mark svg circle {
+  fill: #00deff;
+  stroke: #00deff;
+}
+body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark i {
+  inset: 6px auto auto 6px;
+  width: 44px;
+  height: 44px;
+  border-color: #fff;
+  background: none;
+}
+body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark i:nth-child(2) {
+  inset: 13px auto auto 13px;
+  width: 30px;
+  height: 30px;
+}
+body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark i:nth-child(3) {
+  inset: 22px auto auto 22px;
+  width: 12px;
+  height: 12px;
+  border-color: #00deff;
+  background: #00deff;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 30px;
+  border: 0;
+  border-left: 1px solid #cfd9de;
+  text-align: left;
+}
+body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+  display: block;
+  margin: 0;
+  color: #10405c;
+  font: 500 29px/1.5 var(--font);
+  letter-spacing: .04em;
+}
+body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > span {
+  display: block;
+  margin: 0;
+  color: #527589;
+  font: 400 10px/1.5 var(--font);
+  letter-spacing: .12em;
+}
+body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > span {
+  order: -1;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) {
+  display: block;
+  align-self: center;
+  width: 174px;
+  margin: 0;
+  padding: 0;
+  color: #526671;
+  font: 400 12px/1.5 var(--font);
+}
+body[data-platform-theme="hku"] .masthead > .side-progress > div:first-child,
+body[data-platform-theme="hku"] .academic-masthead > .side-bottom > .prep-progress-title,
+body[data-platform-theme="hku"] .platform-lab-progress > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 0;
+  color: #4c6676;
+  font-size: 12px;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.side-progress b, .side-bottom b, .platform-lab-progress b) {
+  color: #10405c;
+  font: 650 12px/1.5 var(--font);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+body[data-platform-theme="hku"] .masthead > .side-progress > .progress-track,
+body[data-platform-theme="hku"] .academic-masthead > .side-bottom > .side-progress,
+body[data-platform-theme="hku"] .platform-lab-progress > .progress-track {
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin: 9px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #dce5ea;
+  overflow: hidden;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.progress-track > i, .side-bottom > .side-progress > i) {
+  display: block;
+  height: 100%;
+  border: 0;
+  border-right: 4px solid #00deff;
+  border-radius: 0;
+  background: #246891;
+}
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) > p {
+  margin: 8px 0 0;
+  color: #72838d;
+  font: 400 11px/1.5 var(--font);
+}
+
+/* Each selector names a top-level experiment navigation container, never
+ * a scene toolbar or a scientific instrument control inside the content. */
+body[data-platform-theme="hku"] :is(header.site-header > .module-nav, header.site-header > .main-nav.sidebar, header.site-header > .site-nav, body > header > nav[aria-label="主导航"]),
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar {
+  position: relative;
+  inset: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #10405c;
+  color: #fff;
+  box-shadow: none;
+  transform: none;
+  z-index: 20;
+}
+body[data-platform-theme="hku"] :is(header.site-header .module-nav > nav, header.site-header > .main-nav > .nav-row, header.site-header > .site-nav > .nav-row, header > nav[aria-label="主导航"] > .nav-row),
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 0;
+  width: 100%;
+  max-width: var(--platform-header-max);
+  min-height: 60px;
+  margin: 0 auto;
+  padding: 0 var(--platform-header-pad);
+  border: 0;
+  background: #10405c;
+  color: #fff;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #6b92a8 #10405c;
+}
+body[data-platform-theme="hku"] :is(header.site-header .module-nav > nav, header.site-header > .main-nav > .nav-row, header.site-header > .site-nav > .nav-row, header > nav[aria-label="主导航"] > .nav-row) > :is(.nav-item, button[data-page], a[data-route]),
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation > .nav-item {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  min-width: 106px;
+  min-height: 60px;
+  margin: 0;
+  padding: 18px 12px;
+  border: 0;
+  border-left: 1px solid #42697e;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  font: 400 16px/1.5 var(--font);
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  opacity: 1;
+}
+body[data-platform-theme="hku"] :is(header.site-header .module-nav > nav, header.site-header > .main-nav > .nav-row, header.site-header > .site-nav > .nav-row, header > nav[aria-label="主导航"] > .nav-row) > :is(.nav-item, button[data-page], a[data-route]):last-of-type,
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation > .nav-item:last-child {
+  border-right: 1px solid #42697e;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) .nav-end,
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar > :not(#navigation),
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.mobile-menu, #menu-toggle) {
+  display: none;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, #navigation) :is(.nav-num, .nav-icon, .nav-item > svg, .nav-item > em, .nav-item > small),
+body[data-platform-theme="hku"] .module-nav button > :is(span, em) {
+  display: none;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) :is(.nav-item, button[data-page], a[data-route]):hover,
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation > .nav-item:hover {
+  background: #246891;
+  color: #fff;
+  box-shadow: none;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) :is(.nav-item, button[data-page], a[data-route]).active,
+body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation > .nav-item.active {
+  background: #1d5d83;
+  color: #fff;
+  box-shadow: inset 3px 0 #00deff;
+  font-weight: 600;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) :is(.nav-item, button[data-page], a[data-route]).active::before {
+  display: none;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) :is(.nav-item, button[data-page], a[data-route]).active::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #00deff;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) :is(.nav-item, button[data-page], a[data-route]):focus-visible {
+  outline: 3px solid #00deff;
+  outline-offset: -4px;
+}
+body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, #navigation) .nav-item > span:not(.nav-num):not(.nav-icon) {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  font: inherit;
+}
+body[data-platform-theme="hku"] :is(.main-nav, .site-nav, header > nav[aria-label="主导航"]) .nav-dot {
+  width: 4px;
+  height: 4px;
+  background: #00deff;
+}
+body[data-platform-theme="hku"] :is(.app-shell, .main-shell) {
+  margin-left: 0;
+}
+
+@media (max-width: 1150px) {
+  body[data-platform-theme="hku"] {
+    --platform-header-pad: 28px;
+  }
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
+    gap: 24px;
+    min-height: 112px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+    padding-left: 24px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+    font-size: 26px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand) {
+    font-size: 27px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+    font-size: 25px;
+  }
+}
+@media (max-width: 950px) {
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
+    grid-template-columns: auto minmax(0, 1fr);
+    min-height: 108px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) {
+    display: none;
+  }
+}
+@media (max-width: 660px) {
+  body[data-platform-theme="hku"] {
+    --platform-header-pad: 18px;
+  }
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
+    gap: 17px;
+    min-height: 96px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand),
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+    gap: 9px;
+    font-size: 21px;
+    letter-spacing: .03em;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand small, .brand-en, .academic-brand small) {
+    font-size: 7px;
+    letter-spacing: .12em;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .brandmark, .academic-mark) {
+    width: 43px;
+    height: 48px;
+    border-bottom-width: 3px;
+    font-size: 40px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .academic-mark) svg {
+    width: 34px;
+    height: 34px;
+  }
+  body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark i {
+    inset: 5px auto auto 4px;
+    width: 35px;
+    height: 35px;
+  }
+  body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark i:nth-child(2) {
+    inset: 10.5px auto auto 9.5px;
+    width: 24px;
+    height: 24px;
+  }
+  body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark i:nth-child(3) {
+    inset: 17.5px auto auto 16.5px;
+    width: 10px;
+    height: 10px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+    display: flex;
+    padding-left: 17px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+    font-size: 19px;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > span {
+    display: none;
+  }
+  body[data-platform-theme="hku"] :is(header.site-header .module-nav > nav, header.site-header > .main-nav > .nav-row, header.site-header > .site-nav > .nav-row, header > nav[aria-label="主导航"] > .nav-row),
+  body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation {
+    min-height: 52px;
+    padding: 0 10px;
+  }
+  body[data-platform-theme="hku"] :is(header.site-header .module-nav > nav, header.site-header > .main-nav > .nav-row, header.site-header > .site-nav > .nav-row, header > nav[aria-label="主导航"] > .nav-row) > :is(.nav-item, button[data-page], a[data-route]),
+  body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation > .nav-item {
+    flex: 0 0 auto;
+    min-width: 100px;
+    min-height: 52px;
+    padding: 15px 14px;
+    font-size: 14px;
+  }
+  body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) :is(.nav-item, button[data-page], a[data-route]).active::after {
+    height: 3px;
+  }
+}
+@media (max-width: 390px) {
+  body[data-platform-theme="hku"] {
+    --platform-header-pad: 15px;
+  }
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
+    gap: 12px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+    padding-left: 12px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand),
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+    font-size: 18px;
+  }
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+    font-size: 17px;
+  }
+}
+@media print {
+  body[data-platform-theme="hku"] > :is(header.site-header, header.academic-masthead, aside.sidebar),
+  body[data-platform-theme="hku"][data-platform-lab="hall"] > header {
+    display: none !important;
+  }
+}
+
+body[data-platform-theme="hku"] .platform-lab-progress[hidden] {
+  display: none !important;
 }
