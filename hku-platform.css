@@ -105,6 +105,8 @@ dialog{border-radius:0;background:#fff;border:0;border-top:5px solid #10405c;pad
 .hero-scene-halo{position:absolute;inset:8% 2% 1%;background:radial-gradient(ellipse at 52% 52%,#28d8ff15,transparent 66%);filter:blur(10px)}
 .hero-artwork{position:relative;display:block;width:100%;height:100%;max-height:470px;object-fit:contain;object-position:center;filter:none}
 .brand-symbol{object-fit:contain;border-bottom:4px solid #00deff}
+.teacher-statistics-link{display:inline-block;margin-left:18px;border-bottom:1px solid #86a7bb;color:#e0ecf2;white-space:nowrap}
+.teacher-statistics-link:hover{color:#00deff;border-color:#00deff}
 @media(min-width:1600px){
   .hero{min-height:490px}
   .hero-scene{right:0;width:56%}
