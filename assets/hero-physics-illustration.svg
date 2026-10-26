@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" fill="none" role="img" aria-labelledby="hero-title hero-description">
+  <title id="hero-title">物理实验：观察波形与探索光的干涉</title>
+  <desc id="hero-description">一台正面绘制的浅色双通道示波器，屏幕显示青色正弦波。后方是一组简洁的同心干涉环，全部采用平面色块和清晰线条。</desc>
+  <defs>
+    <clipPath id="hero-screen-clip"><rect x="105" y="233" width="240" height="139" rx="7"/></clipPath>
+  </defs>
+
+  <!-- The optical motif is a single flat disc, echoing the Newton-ring cover. -->
+  <circle cx="422" cy="143" r="99" fill="#E4EEF4"/>
+  <circle cx="422" cy="143" r="99" stroke="#75B5D2" stroke-width="3"/>
+  <circle cx="422" cy="143" r="86" stroke="#10405C" stroke-width="3"/>
+  <circle cx="422" cy="143" r="71" stroke="#246891" stroke-width="5"/>
+  <circle cx="422" cy="143" r="55" stroke="#10405C" stroke-width="3"/>
+  <circle cx="422" cy="143" r="36" stroke="#246891" stroke-width="6"/>
+  <circle cx="422" cy="143" r="15" fill="#10405C"/>
+  <path d="M422 44a99 99 0 0 1 98 85" stroke="#00DEFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M366 81a83 83 0 0 1 53-21" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M312 143h220M422 33v181" stroke="#10405C" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="4 6"/>
+
+  <!-- Front elevation only: no extrusion, perspective, gradients or shadows. -->
+  <path d="M206 204v-20a9 9 0 0 1 9-9h130a9 9 0 0 1 9 9v20h-13v-15H219v15" fill="#CFD9DE" stroke="#10405C" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="77" y="203" width="430" height="198" rx="17" fill="#F3F3F3" stroke="#10405C" stroke-width="3"/>
+  <path d="M91 216h402" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M109 401v12h40v-12M435 401v12h40v-12" fill="#CDBBA5" stroke="#10405C" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Screen and graticule share the restrained lines of the experiment cards. -->
+  <rect x="93" y="222" width="264" height="162" rx="13" fill="#10405C"/>
+  <rect x="105" y="233" width="240" height="139" rx="7" fill="#16374D" stroke="#356784" stroke-width="1.5"/>
+  <g clip-path="url(#hero-screen-clip)">
+    <path d="M105 268h240M105 337h240M153 233v139M201 233v139M249 233v139M297 233v139" stroke="#75B5D2" stroke-opacity=".22" stroke-width="1.2"/>
+    <path d="M105 303h240M225 233v139" stroke="#75B5D2" stroke-opacity=".48" stroke-width="1.5" stroke-dasharray="3 5"/>
+    <path d="M104 303c20-61 40-61 60 0s40 61 60 0 40-61 60 0 40 61 61 0" stroke="#00DEFF" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M104 321c20-22 40-22 60 0s40 22 60 0 40-22 60 0 40 22 61 0" stroke="#8DB9CC" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- A few large controls keep the silhouette readable at smaller sizes. -->
+  <path d="M376 231h112M376 294h112M376 348h112" stroke="#CFD9DE" stroke-width="2"/>
+  <g fill="#E4EEF4" stroke="#10405C" stroke-width="2.5">
+    <circle cx="396" cy="263" r="19"/>
+    <circle cx="467" cy="263" r="19"/>
+    <circle cx="396" cy="321" r="16"/>
+    <circle cx="467" cy="321" r="16"/>
+  </g>
+  <path d="M396 263l8-12M467 263l-3-14M396 321l8-8M467 321l-7-9" stroke="#10405C" stroke-width="3" stroke-linecap="round"/>
+  <rect x="378" y="362" width="21" height="11" rx="3" fill="#10405C"/>
+  <circle cx="429" cy="368" r="9" fill="#00DEFF" stroke="#10405C" stroke-width="2.5"/>
+  <circle cx="467" cy="368" r="9" fill="#10405C"/>
+  <path d="M474 215h13" stroke="#246891" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="464" cy="215" r="2.5" fill="#246891"/>
+
+  <!-- One continuous probe lead adds a useful, simple outer contour. -->
+  <path d="M467 368v23c0 35 65 36 65 1v-45" stroke="#00DEFF" stroke-width="3" stroke-linecap="round"/>
+  <rect x="526" y="328" width="12" height="22" rx="4" fill="#E4EEF4" stroke="#10405C" stroke-width="2.5"/>
+  <path d="M532 328v-15" stroke="#E4EEF4" stroke-width="3" stroke-linecap="round"/>
+</svg>

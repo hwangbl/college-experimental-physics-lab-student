@@ -779,3 +779,58 @@ body[data-platform-theme="hku"] :is(.app-shell, .main-shell) {
 body[data-platform-theme="hku"] .platform-lab-progress[hidden] {
   display: none !important;
 }
+
+/* One platform identity in every experiment; the original link still routes home. */
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > .platform-lab-brand {
+  gap: 14px;
+  font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0;
+}
+body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-mark {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: 59px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 4px solid #00deff;
+  border-radius: 0;
+  background: #10405c;
+  object-fit: contain;
+  box-shadow: none;
+}
+body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: #10405c;
+}
+body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > strong {
+  display: block;
+  margin: 0;
+  color: #10405c;
+  font: 650 28px/1.3 Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: .06em;
+}
+body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > small {
+  display: block;
+  margin: 5px 0 0;
+  color: #356784;
+  font: 500 9px/1.4 Arial, sans-serif;
+  letter-spacing: .2em;
+  white-space: nowrap;
+}
+@media(max-width:1150px){
+  body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > strong{font-size:25px}
+}
+@media(max-width:660px){
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > .platform-lab-brand{gap:9px}
+  body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-mark{width:43px;height:48px;border-bottom-width:3px}
+  body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > strong{font-size:21px;letter-spacing:.03em}
+  body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > small{font-size:7px;letter-spacing:.12em}
+}
+@media(max-width:390px){
+  body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > strong{font-size:18px}
+}

@@ -96,3 +96,43 @@ dialog{border-radius:0;background:#fff;border:0;border-top:5px solid #10405c;pad
   .workspace-menu{width:170px}
   .lab-mode.focus-mode .lab-workspace{--workspace-toolbar-height:42px}
 }
+
+/* The homepage illustration shares the experiment covers' flat vector style. */
+.hero{min-height:465px;background:linear-gradient(112deg,#10405c 0%,#10405c 52%,#164b67 100%)}
+.hero-copy{width:49%;max-width:620px}
+.hero:before{opacity:.25}
+.hero-scene{position:absolute;z-index:1;inset:0 0 0 auto;width:56%;display:grid;place-items:center;pointer-events:none}
+.hero-scene-halo{position:absolute;inset:8% 2% 1%;background:radial-gradient(ellipse at 52% 52%,#28d8ff15,transparent 66%);filter:blur(10px)}
+.hero-artwork{position:relative;display:block;width:100%;height:100%;max-height:470px;object-fit:contain;object-position:center;filter:none}
+.brand-symbol{object-fit:contain;border-bottom:4px solid #00deff}
+@media(min-width:1600px){
+  .hero{min-height:490px}
+  .hero-scene{right:0;width:56%}
+  .hero-artwork{max-height:490px}
+}
+@media(max-width:980px){
+  .hero{min-height:465px}
+  .hero-copy{width:56%;max-width:none}
+  .hero-scene{right:-4%;width:62%;opacity:.85}
+  .hero h1{font-size:46px}
+  .hero-actions{gap:10px}
+  .hero-resume{min-width:173px;gap:12px}
+}
+@media(max-width:700px){
+  .hero{min-height:0;padding:30px 25px 14px;display:flex;flex-direction:column}
+  .hero-copy{width:100%;max-width:none}
+  .hero h1{font-size:43px}
+  .hero-resume{min-width:143px}
+  .hero-art{display:none}
+  .hero-scene{position:relative;inset:auto;width:calc(100% + 50px);height:270px;margin:-16px -25px 0;opacity:1}
+  .hero-artwork{width:100%;height:100%;max-height:none;object-position:center}
+}
+@media(max-width:430px){
+  .hero{padding:29px 23px 14px}
+  .hero h1{font-size:40px}
+  .hero-scene{width:calc(100% + 46px);height:240px;margin:-10px -23px 0}
+}
+@media(max-width:360px){
+  .hero h1{font-size:36px}
+  .hero-scene{height:210px;margin-top:0}
+}

@@ -2,12 +2,14 @@
 (() => {
   'use strict';
   if (window.parent === window) return;
-  const id = document.currentScript?.dataset.lab;
+  const bridgeScript = document.currentScript;
+  const id = bridgeScript?.dataset.lab;
   if (!id) return;
   if(window.__physicsLabHubBridge?.id===id){window.__physicsLabHubBridge.report();return;}
   const selectors={young:'#progressText',resistance:'#progress-text',rings:'#progressText',polarization:'#progress-count',oscilloscope:'#progress-text',hall:'.progress-row small'};
   const mastheads={rings:'header.site-header > .masthead.site-wrap',polarization:'header.site-header#sidebar > .masthead.page-wrap',oscilloscope:'body.academic-theme > header.academic-masthead',hall:'body > header > .masthead.wrap'};
   const navigations={young:'#nav',resistance:'.module-nav > nav',rings:'#mainNavigation > .nav-row',polarization:'#main-nav',oscilloscope:'#navigation',hall:'header > nav > .nav-row'};
+  const brands={young:'header.sidebar.site-header > .masthead > a.brand',resistance:'header.sidebar.site-header > .academic-masthead > a.brand',rings:'header.site-header > .masthead.site-wrap > a.brand',polarization:'header.site-header#sidebar > .masthead.page-wrap > a.brand',oscilloscope:'body.academic-theme > header.academic-masthead > a.academic-brand',hall:'body > header > .masthead.wrap > a.brand'};
   let timer,last='',progressView;
   function snapshot() {
     const data={type:'physics-lab-state',id,hash:location.hash};
@@ -49,6 +51,22 @@
     history[method]=function(...args){const result=original.apply(this,args);schedule();return result;};
   }
   function initialize(){
+    const brand=document.querySelector(brands[id]);
+    if(brand) {
+      const logoUrl=new URL('assets/favicon.svg',bridgeScript.src);
+      const version=new URL(bridgeScript.src).searchParams.get('v');
+      if(version)logoUrl.searchParams.set('v',version);
+      const mark=document.createElement('img');
+      mark.className='platform-brand-mark';mark.src=logoUrl.href;mark.alt='';mark.width=56;mark.height=59;
+      const copy=document.createElement('span');
+      copy.className='platform-brand-copy';
+      const title=document.createElement('strong');title.textContent='大学物理实验';
+      const subtitle=document.createElement('small');subtitle.textContent='PHYSICS LABORATORY';
+      copy.append(title,subtitle);
+      brand.classList.add('platform-lab-brand');
+      brand.setAttribute('aria-label','大学物理实验，返回本实验概览');
+      brand.replaceChildren(mark,copy);
+    }
     const masthead=mastheads[id]&&document.querySelector(mastheads[id]);
     if(masthead) {
       progressView=document.createElement('div');
