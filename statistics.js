@@ -4,6 +4,7 @@
   const TIMEZONE = 'Asia/Shanghai';
   const DAY = 86400000;
   const MAX_DAYS = 366;
+  const REFRESH_MS = 60000;
   const LABS = Object.freeze([
     {id:'young',name:'杨氏模量'},
     {id:'resistance',name:'非线性电阻'},
@@ -21,6 +22,9 @@
   let requestId = 0;
   let pendingRequest = null;
   let loading = false;
+  let refreshTimer = null;
+  let lastSuccessfulAt = 0;
+  let calendarDay = '';
 
   function shanghaiToday() {
     const parts = new Intl.DateTimeFormat('en-CA', {timeZone:TIMEZONE,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
@@ -34,7 +38,20 @@
   }
   function dayTime(value) { return new Date(`${value}T00:00:00Z`).getTime(); }
   function addDays(value, count) { return new Date(dayTime(value) + count * DAY).toISOString().slice(0,10); }
+  function refreshCalendarBounds() {
+    const today = shanghaiToday();
+    if (today === calendarDay) return;
+    const followsDefault = $('date-from').value === addDays(calendarDay,-6) && $('date-to').value === calendarDay;
+    $('date-from').max = today;
+    $('date-to').max = today;
+    if (followsDefault) {
+      $('date-from').value = addDays(today,-6);
+      $('date-to').value = today;
+    }
+    calendarDay = today;
+  }
   function dateRange() {
+    refreshCalendarBounds();
     const from = $('date-from').value;
     const to = $('date-to').value;
     if (!validDay(from) || !validDay(to)) throw new Error('请选择有效的开始日期和结束日期。');
@@ -53,6 +70,7 @@
   }
   function clearReport() {
     report = null;
+    lastSuccessfulAt = 0;
     $('report-results').hidden = true;
     $('empty-state').hidden = true;
     $('stat-grid').replaceChildren();
@@ -73,7 +91,20 @@
     $('access-session').hidden = !value;
     $('query-button').disabled = loading || !value;
   }
+  function stopRefresh() {
+    if (refreshTimer !== null) clearTimeout(refreshTimer);
+    refreshTimer = null;
+  }
+  function scheduleRefresh() {
+    stopRefresh();
+    if (!endpoint || !managementKey || loading || document.hidden) return;
+    refreshTimer = setTimeout(() => {
+      refreshTimer = null;
+      queryReport({automatic:true});
+    },REFRESH_MS);
+  }
   function lock() {
+    stopRefresh();
     requestId += 1;
     pendingRequest?.abort();
     pendingRequest = null;
@@ -125,6 +156,7 @@
   function renderReport(value) {
     clearReport();
     report = value;
+    lastSuccessfulAt = Date.now();
     if (value.total === 0) {
       $('empty-description').textContent = `${value.from} 至 ${value.to} 没有已记录的访问。可以尝试选择其他日期；统计服务接入前的访问不会补录。`;
       $('empty-state').hidden = false;
@@ -156,10 +188,13 @@
     for (const lab of LABS) totalRow.append(element('td',number.format(value.totals.get(lab.id))));
     totalRow.append(element('td',number.format(value.total)));
     $('daily-table-foot').replaceChildren(totalRow);
-    $('report-updated').textContent = `查询时间：${new Intl.DateTimeFormat('zh-CN',{timeZone:TIMEZONE,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())}（北京时间）。当日数据会随新的访问继续增加。`;
+    $('report-updated').textContent = `查询时间：${formatTime(lastSuccessfulAt)}（北京时间）。当日数据会随新的访问继续增加。`;
     $('report-results').hidden = false;
   }
-  async function queryReport() {
+  function formatTime(time) {
+    return new Intl.DateTimeFormat('zh-CN',{timeZone:TIMEZONE,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date(time));
+  }
+  async function queryReport({automatic = false} = {}) {
     if (!endpoint || loading) return;
     if (!managementKey) {
       setMessage('请先输入管理密钥。',true);
@@ -168,14 +203,16 @@
     }
     let range;
     try { range = dateRange(); }
-    catch (error) { setMessage(error.message,true); return; }
+    catch (error) { setMessage(error.message,true); if (automatic) scheduleRefresh(); return; }
+    stopRefresh();
+    const preserveReport = automatic && report?.from === range.from && report?.to === range.to;
     const currentRequest = ++requestId;
     const controller = new AbortController();
     pendingRequest = controller;
     let timedOut = false;
     const timeout = setTimeout(() => { timedOut = true; controller.abort(); },20000);
-    clearReport();
-    setMessage('正在读取所选日期的访问统计…');
+    if (!preserveReport) clearReport();
+    setMessage(automatic ? '正在自动更新访问统计…' : '正在读取所选日期的访问统计…');
     setLoading(true);
     try {
       const response = await fetch(endpoint,{
@@ -189,12 +226,11 @@
         signal:controller.signal
       });
       if (currentRequest !== requestId) return;
-      if (response.status === 401) {
+      if (response.status === 401 || response.status === 403) {
         managementKey = '';
         setUnlocked(false);
-        throw new Error('管理密钥不正确，请重新输入。');
+        throw new Error(response.status === 401 ? '管理密钥不正确，请重新输入。' : '当前管理密钥无权读取统计，请检查统计服务的访问配置。');
       }
-      if (response.status === 403) throw new Error('当前管理密钥无权读取统计，请检查统计服务的访问配置。');
       if (response.status === 429) throw new Error('查询过于频繁，请稍后再试。');
       if (!response.ok) throw new Error('统计服务暂时无法读取，请稍后重试。');
       let data;
@@ -204,20 +240,26 @@
       const value = validateReport(data,range);
       renderReport(value);
       setUnlocked(true);
-      $('service-status').textContent = '统计服务已连接。管理密钥仅保留在当前页面内存中。';
+      $('service-status').textContent = '统计服务已连接。页面可见时每分钟自动更新；管理密钥仅保留在当前页面内存中。';
       setMessage('');
     } catch (error) {
       if (currentRequest !== requestId) return;
-      clearReport();
-      if (error.name === 'AbortError') setMessage(timedOut ? '统计查询超时，请稍后重试。' : '统计查询已取消。',true);
-      else if (error instanceof TypeError) setMessage('无法连接统计服务，请检查网络或统计服务配置后重试。',true);
-      else setMessage(error.message || '统计查询失败，请稍后重试。',true);
+      const message = error.name === 'AbortError' ? (timedOut ? '统计查询超时，请稍后重试。' : '统计查询已取消。')
+        : error instanceof TypeError ? '无法连接统计服务，请检查网络或统计服务配置后重试。'
+        : error.message || '统计查询失败，请稍后重试。';
+      if (preserveReport && managementKey && report && lastSuccessfulAt) {
+        setMessage(`${message} 当前显示的是 ${formatTime(lastSuccessfulAt)}（北京时间）成功查询的旧数据。`,true);
+      } else {
+        clearReport();
+        setMessage(message,true);
+      }
       if (!managementKey) $('management-key').focus();
     } finally {
       clearTimeout(timeout);
       if (currentRequest === requestId) {
         pendingRequest = null;
         setLoading(false);
+        scheduleRefresh();
       }
     }
   }
@@ -238,6 +280,7 @@
   }
 
   const today = shanghaiToday();
+  calendarDay = today;
   $('date-from').value = addDays(today,-6);
   $('date-to').value = today;
   $('date-from').max = today;
@@ -258,7 +301,12 @@
   $('report-form').addEventListener('submit',event => { event.preventDefault(); queryReport(); });
   $('lock-button').addEventListener('click',lock);
   $('export-button').addEventListener('click',exportCsv);
+  document.addEventListener('visibilitychange',() => {
+    if (document.hidden) stopRefresh();
+    else if (managementKey && endpoint && !loading) queryReport({automatic:true});
+  });
   window.addEventListener('pagehide',() => {
+    stopRefresh();
     requestId += 1;
     managementKey = '';
     $('management-key').value = '';
