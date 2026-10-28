@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">分光计、光栅和衍射光谱</title>
+  <desc id="desc">俯视分光计：左侧平行光管将光送入中央光栅，右侧可转动的望远镜观察不同方向的谱线，中央刻度盘用于测量角度。</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" stroke="#10405C" stroke-opacity=".055"/></pattern>
+    <pattern id="grating" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 0v5" stroke="#246891" stroke-width="2"/></pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#10405C" flood-opacity=".1"/></filter>
+  </defs>
+  <path fill="#F3F3F3" d="M0 0h800v460H0z"/><path fill="url(#grid)" d="M0 0h800v460H0z"/>
+  <ellipse cx="390" cy="359" rx="211" ry="22" fill="#10405C" opacity=".05"/>
+  <circle cx="390" cy="233" r="131" fill="#FFFFFF" stroke="#CFD9DE" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="390" cy="233" r="112" fill="#E7EDF0" stroke="#10405C" stroke-width="3"/>
+  <circle cx="390" cy="233" r="101" stroke="#246891" stroke-width="12" stroke-dasharray="1 7.8"/>
+  <circle cx="390" cy="233" r="82" fill="#F7F9FA" stroke="#10405C" stroke-opacity=".2" stroke-width="1.5"/>
+  <g stroke="#10405C" stroke-width="2">
+    <path d="M390 122v18m0 186v18m-111-111h18m186 0h18"/>
+    <path d="m311 154 13 13m132 132 13 13m-158 0 13-13m132-132 13-13"/>
+  </g>
+  <path d="M390 233h276" stroke="#10405C" stroke-opacity=".24" stroke-dasharray="5 5"/>
+  <path d="m392 233 260-94m-260 94 258-81m-258 81 255-65" stroke-width="3"/>
+  <path d="m392 233 262-99" stroke="#C7A72E" stroke-width="3"/>
+  <path d="m392 233 264-91" stroke="#E0C64C" stroke-width="3"/>
+  <path d="m392 233 264-68" stroke="#5B9A74" stroke-width="3"/>
+  <path d="m392 233 262 99" stroke="#C7A72E" stroke-width="2" opacity=".5"/>
+  <path d="m392 233 264 91" stroke="#E0C64C" stroke-width="2" opacity=".5"/>
+  <path d="m392 233 264 68" stroke="#5B9A74" stroke-width="2" opacity=".5"/>
+  <path d="M112 213h190v40H112z" fill="#CFD9DE" stroke="#10405C" stroke-width="2.5"/>
+  <path d="M119 219h168v8H119z" fill="#FFFFFF" opacity=".7"/>
+  <path d="M111 209h13v48h-13zM287 205h18v56h-18z" fill="#246891" stroke="#10405C" stroke-width="2"/>
+  <path d="M88 218h23v30H88z" fill="#10405C"/>
+  <path d="M91 226h12v14H91z" fill="#00DEFF"/>
+  <path d="M304 226h85m-85 14h85" stroke="#00C9E7" stroke-width="2"/>
+  <path d="M379 197h24v72h-24z" fill="#FFFFFF" stroke="#10405C" stroke-width="2"/>
+  <path d="M384 201h14v64h-14z" fill="url(#grating)"/>
+  <g transform="rotate(-19 390 233)">
+    <path d="M478 215h192v36H478z" fill="#CFD9DE" stroke="#10405C" stroke-width="2.5"/>
+    <path d="M486 221h171v7H486z" fill="#FFFFFF" opacity=".7"/>
+    <path d="M475 209h16v48h-16zM660 210h15v46h-15z" fill="#246891" stroke="#10405C" stroke-width="2"/>
+    <path d="M675 221h29v24h-29z" fill="#10405C"/>
+    <ellipse cx="704" cy="233" rx="6" ry="12" fill="#00DEFF" stroke="#10405C" stroke-width="2"/>
+  </g>
+  <path d="M453 233a63 63 0 0 0-4-22" stroke="#246891" stroke-width="1.8"/>
+  <text x="464" y="225" fill="#246891" font-family="Georgia,serif" font-size="23" font-style="italic">φ</text>
+  <path d="M390 188v-40" stroke="#356784" stroke-width="1.2"/>
+  <text x="366" y="136" fill="#356784" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.6">GRATING</text>
+  <text x="148" y="287" fill="#356784" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.6">COLLIMATOR</text>
+  <text x="518" y="112" fill="#356784" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.6">TELESCOPE</text>
+  <path d="M259 402h53m175 0h53" stroke="#CFD9DE" stroke-width="1.5"/>
+  <text x="330" y="410" fill="#356784" font-family="Georgia,serif" font-size="24" font-style="italic">d sin φ = kλ</text>
+</svg>

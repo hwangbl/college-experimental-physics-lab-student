@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const config=window.PHYSICS_LAB_ANALYTICS||{};
-  const labs=new Set(['young','resistance','rings','polarization','oscilloscope','hall']);
+  const labs=new Set(['young','resistance','rings','polarization','oscilloscope','hall','spectrometer']);
   const idKey='physics-lab-anonymous-browser-v1',cacheKey='physics-lab-visit-receipts-v1';
   const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   const pending=new Map();

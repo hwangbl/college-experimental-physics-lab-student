@@ -6,10 +6,10 @@
   const id = bridgeScript?.dataset.lab;
   if (!id) return;
   if(window.__physicsLabHubBridge?.id===id){window.__physicsLabHubBridge.report();return;}
-  const selectors={young:'#progressText',resistance:'#progress-text',rings:'#progressText',polarization:'#progress-count',oscilloscope:'#progress-text',hall:'.progress-row small'};
-  const mastheads={rings:'header.site-header > .masthead.site-wrap',polarization:'header.site-header#sidebar > .masthead.page-wrap',oscilloscope:'body.academic-theme > header.academic-masthead',hall:'body > header > .masthead.wrap'};
-  const navigations={young:'#nav',resistance:'.module-nav > nav',rings:'#mainNavigation > .nav-row',polarization:'#main-nav',oscilloscope:'#navigation',hall:'header > nav > .nav-row'};
-  const brands={young:'header.sidebar.site-header > .masthead > a.brand',resistance:'header.sidebar.site-header > .academic-masthead > a.brand',rings:'header.site-header > .masthead.site-wrap > a.brand',polarization:'header.site-header#sidebar > .masthead.page-wrap > a.brand',oscilloscope:'body.academic-theme > header.academic-masthead > a.academic-brand',hall:'body > header > .masthead.wrap > a.brand'};
+  const selectors={young:'#progressText',resistance:'#progress-text',rings:'#progressText',polarization:'#progress-count',oscilloscope:'#progress-text',hall:'.progress-row small',spectrometer:'#progress-text'};
+  const mastheads={rings:'header.site-header > .masthead.site-wrap',polarization:'header.site-header#sidebar > .masthead.page-wrap',oscilloscope:'body.academic-theme > header.academic-masthead',hall:'body > header > .masthead.wrap',spectrometer:'body > header.sp-masthead'};
+  const navigations={young:'#nav',resistance:'.module-nav > nav',rings:'#mainNavigation > .nav-row',polarization:'#main-nav',oscilloscope:'#navigation',hall:'header > nav > .nav-row',spectrometer:'#spectrometer-nav'};
+  const brands={young:'header.sidebar.site-header > .masthead > a.brand',resistance:'header.sidebar.site-header > .academic-masthead > a.brand',rings:'header.site-header > .masthead.site-wrap > a.brand',polarization:'header.site-header#sidebar > .masthead.page-wrap > a.brand',oscilloscope:'body.academic-theme > header.academic-masthead > a.academic-brand',hall:'body > header > .masthead.wrap > a.brand',spectrometer:'header.sp-masthead > a.sp-brand'};
   let timer,last='',progressView;
   function snapshot() {
     const data={type:'physics-lab-state',id,hash:location.hash};

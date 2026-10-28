@@ -40,7 +40,11 @@ dialog{border-radius:0;background:#fff;border:0;border-top:5px solid #10405c;pad
 
 @media(max-width:700px){.stats .stat{flex-direction:column;align-items:flex-start;gap:7px}.stats .stat>span{white-space:nowrap}.stats .stat strong{font-size:29px}.stats .stat b{font-size:10px}.stats .stat span{font-size:8px}}
 
-/* Six experiments retain a readable single navigation row on small tablets. */
+/* Experiment links scroll when the row cannot fit comfortably. */
+@media(min-width:701px){
+  .lab-nav{overflow-x:auto;justify-content:flex-start;overscroll-behavior-inline:contain;scrollbar-width:thin}
+  .lab-nav a{flex:1 0 auto}
+}
 @media(min-width:701px) and (max-width:980px){
   .lab-nav a,.lab-mode .lab-nav a{min-width:0;padding:11px 8px;font-size:11px;gap:6px;letter-spacing:0}
   .lab-nav .lab-num{font-size:9px;min-width:12px}

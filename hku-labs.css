@@ -1,5 +1,5 @@
 /*
- * Shared academic chrome for the six preserved experiment applications.
+ * Shared academic chrome for the preserved experiment applications.
  * The palette and flat surfaces follow the HKU Physics reference. All rules
  * require the platform opt-in attribute; scientific drawings, chart series,
  * instrument controls, validation states and responsive geometry stay local
@@ -338,7 +338,7 @@ body[data-platform-theme="hku"] > header.sidebar.site-header {
   box-shadow: none;
   transform: none;
 }
-body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap, header.sp-masthead),
 body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) 174px;
@@ -354,7 +354,7 @@ body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
   background: #fff;
   box-shadow: none;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.brand, .academic-brand, .sp-brand) {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -368,20 +368,20 @@ body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand,
   white-space: nowrap;
   text-decoration: none;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand strong, .academic-brand strong, .sp-brand strong) {
   display: block;
   color: #10405c;
   font: 650 28px/1.3 var(--font);
   letter-spacing: .06em;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand small, .brand-en, .academic-brand small) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand small, .brand-en, .academic-brand small, .sp-brand small) {
   display: block;
   margin: 5px 0 0;
   color: #356784;
   font: 500 9px/1.4 Arial, sans-serif;
   letter-spacing: .2em;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .brandmark, .academic-mark) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand-mark, .brandmark, .academic-mark) {
   position: relative;
   display: grid;
   place-items: center;
@@ -399,17 +399,17 @@ body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-ma
   letter-spacing: 0;
   box-shadow: none;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) .brandmark::after {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) .brandmark::after {
   display: none;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .academic-mark) svg {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand-mark, .academic-mark) svg {
   width: 44px;
   height: 44px;
   fill: none;
   stroke: #fff;
   stroke-width: 1.3;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) .brand-mark svg circle {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) .brand-mark svg circle {
   fill: #00deff;
   stroke: #00deff;
 }
@@ -432,7 +432,7 @@ body[data-platform-theme="hku"][data-platform-lab="rings"] .masthead .brand-mark
   border-color: #00deff;
   background: #00deff;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.masthead-title, .course-name, .academic-course-title, .sp-course) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -445,24 +445,24 @@ body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthe
   border-left: 1px solid #cfd9de;
   text-align: left;
 }
-body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > strong {
   display: block;
   margin: 0;
   color: #10405c;
   font: 500 29px/1.5 var(--font);
   letter-spacing: .04em;
 }
-body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > span {
+body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > span {
   display: block;
   margin: 0;
   color: #527589;
   font: 400 10px/1.5 var(--font);
   letter-spacing: .12em;
 }
-body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > span {
+body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > span {
   order: -1;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) {
   display: block;
   align-self: center;
   width: 174px;
@@ -482,7 +482,7 @@ body[data-platform-theme="hku"] .platform-lab-progress > div:first-child {
   color: #4c6676;
   font-size: 12px;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.side-progress b, .side-bottom b, .platform-lab-progress b) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.side-progress b, .side-bottom b, .platform-lab-progress b) {
   color: #10405c;
   font: 650 12px/1.5 var(--font);
   white-space: nowrap;
@@ -501,7 +501,7 @@ body[data-platform-theme="hku"] .platform-lab-progress > .progress-track {
   background: #dce5ea;
   overflow: hidden;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.progress-track > i, .side-bottom > .side-progress > i) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.progress-track > i, .side-bottom > .side-progress > i) {
   display: block;
   height: 100%;
   border: 0;
@@ -509,7 +509,7 @@ body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.progress
   border-radius: 0;
   background: #246891;
 }
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) > p {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) > p {
   margin: 8px 0 0;
   color: #72838d;
   font: 400 11px/1.5 var(--font);
@@ -590,7 +590,7 @@ body.academic-theme[data-platform-theme="hku"] > aside.sidebar > #navigation > .
 }
 body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, header > nav[aria-label="主导航"], #navigation) .nav-end,
 body.academic-theme[data-platform-theme="hku"] > aside.sidebar > :not(#navigation),
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.mobile-menu, #menu-toggle) {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.mobile-menu, #menu-toggle) {
   display: none;
 }
 body[data-platform-theme="hku"] :is(.module-nav, .main-nav, .site-nav, #navigation) :is(.nav-num, .nav-icon, .nav-item > svg, .nav-item > em, .nav-item > small),
@@ -647,31 +647,31 @@ body[data-platform-theme="hku"] :is(.app-shell, .main-shell) {
   body[data-platform-theme="hku"] {
     --platform-header-pad: 28px;
   }
-  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap, header.sp-masthead),
   body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
     gap: 24px;
     min-height: 112px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.masthead-title, .course-name, .academic-course-title, .sp-course) {
     padding-left: 24px;
   }
-  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > strong {
     font-size: 26px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.brand, .academic-brand, .sp-brand) {
     font-size: 27px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand strong, .academic-brand strong, .sp-brand strong) {
     font-size: 25px;
   }
 }
 @media (max-width: 950px) {
-  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap, header.sp-masthead),
   body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
     grid-template-columns: auto minmax(0, 1fr);
     min-height: 108px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.side-progress, .side-bottom, .platform-lab-progress) {
     display: none;
   }
 }
@@ -679,30 +679,30 @@ body[data-platform-theme="hku"] :is(.app-shell, .main-shell) {
   body[data-platform-theme="hku"] {
     --platform-header-pad: 18px;
   }
-  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap, header.sp-masthead),
   body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
     gap: 17px;
     min-height: 96px;
     padding-top: 18px;
     padding-bottom: 18px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand),
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.brand, .academic-brand, .sp-brand),
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand strong, .academic-brand strong, .sp-brand strong) {
     gap: 9px;
     font-size: 21px;
     letter-spacing: .03em;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand small, .brand-en, .academic-brand small) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand small, .brand-en, .academic-brand small, .sp-brand small) {
     font-size: 7px;
     letter-spacing: .12em;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .brandmark, .academic-mark) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand-mark, .brandmark, .academic-mark) {
     width: 43px;
     height: 48px;
     border-bottom-width: 3px;
     font-size: 40px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand-mark, .academic-mark) svg {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand-mark, .academic-mark) svg {
     width: 34px;
     height: 34px;
   }
@@ -721,16 +721,16 @@ body[data-platform-theme="hku"] :is(.app-shell, .main-shell) {
     width: 10px;
     height: 10px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.masthead-title, .course-name, .academic-course-title, .sp-course) {
     display: flex;
     padding-left: 17px;
   }
-  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > strong {
     font-size: 19px;
     line-height: 1.5;
     letter-spacing: 0;
   }
-  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > span {
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > span {
     display: none;
   }
   body[data-platform-theme="hku"] :is(header.site-header .module-nav > nav, header.site-header > .main-nav > .nav-row, header.site-header > .site-nav > .nav-row, header > nav[aria-label="主导航"] > .nav-row),
@@ -754,23 +754,23 @@ body[data-platform-theme="hku"] :is(.app-shell, .main-shell) {
   body[data-platform-theme="hku"] {
     --platform-header-pad: 15px;
   }
-  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap),
+  body[data-platform-theme="hku"] :is(header.site-header > .masthead, header.site-header > .academic-masthead, body > header > .masthead.wrap, header.sp-masthead),
   body.academic-theme[data-platform-theme="hku"] > header.academic-masthead {
     gap: 12px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.masthead-title, .course-name, .academic-course-title) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.masthead-title, .course-name, .academic-course-title, .sp-course) {
     padding-left: 12px;
   }
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > :is(.brand, .academic-brand),
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) :is(.brand strong, .academic-brand strong) {
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > :is(.brand, .academic-brand, .sp-brand),
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) :is(.brand strong, .academic-brand strong, .sp-brand strong) {
     font-size: 18px;
   }
-  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title) > strong {
+  body[data-platform-theme="hku"] :is(.masthead-title, .course-name, .academic-course-title, .sp-course) > strong {
     font-size: 17px;
   }
 }
 @media print {
-  body[data-platform-theme="hku"] > :is(header.site-header, header.academic-masthead, aside.sidebar),
+  body[data-platform-theme="hku"] > :is(header.site-header, header.academic-masthead, header.sp-masthead, nav.sp-nav, aside.sidebar),
   body[data-platform-theme="hku"][data-platform-lab="hall"] > header {
     display: none !important;
   }
@@ -780,8 +780,56 @@ body[data-platform-theme="hku"] .platform-lab-progress[hidden] {
   display: none !important;
 }
 
+/* Spectrometer keeps its six native routes and the same shared header chrome. */
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] .sp-masthead > :is(.sp-progress, #help-button) {
+  display: none;
+}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] > #spectrometer-nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 0;
+  width: 100%;
+  min-height: 60px;
+  margin: 0;
+  padding: 0 max(var(--platform-header-pad), calc((100vw - 1360px) / 2));
+  background: #10405c;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: #6b92a8 #10405c;
+}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 106px;
+  max-width: none;
+  min-height: 60px;
+  padding: 18px 12px;
+  border: 0;
+  border-left: 1px solid #42697e;
+  color: #fff;
+  font: 400 16px/1.5 var(--font);
+  white-space: nowrap;
+}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a:last-child {border-right: 1px solid #42697e;}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a > span {display: none;}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a:hover {background: #246891;}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a.active {background: #1d5d83;box-shadow: inset 3px 0 #00deff;font-weight: 600;}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a.active::after {content: "";position: absolute;inset: auto 0 0;height: 4px;background: #00deff;}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a:focus-visible {outline: 3px solid #00deff;outline-offset: -4px;}
+body[data-platform-theme="hku"][data-platform-lab="spectrometer"] .sp-footer button {color: #e4eef4;}
+@media(max-width:660px){
+  body[data-platform-theme="hku"][data-platform-lab="spectrometer"] > #spectrometer-nav{min-height:52px;padding:0 10px}
+  body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a{flex:0 0 auto;min-width:100px;min-height:52px;padding:15px 14px;font-size:14px}
+  body[data-platform-theme="hku"][data-platform-lab="spectrometer"] #spectrometer-nav > a.active::after{height:3px}
+}
+
 /* One platform identity in every experiment; the original link still routes home. */
-body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > .platform-lab-brand {
+body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > .platform-lab-brand {
   gap: 14px;
   font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   letter-spacing: 0;
@@ -826,7 +874,7 @@ body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > sma
   body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > strong{font-size:25px}
 }
 @media(max-width:660px){
-  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead) > .platform-lab-brand{gap:9px}
+  body[data-platform-theme="hku"] :is(.masthead, .academic-masthead, .sp-masthead) > .platform-lab-brand{gap:9px}
   body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-mark{width:43px;height:48px;border-bottom-width:3px}
   body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > strong{font-size:21px;letter-spacing:.03em}
   body[data-platform-theme="hku"] .platform-lab-brand > .platform-brand-copy > small{font-size:7px;letter-spacing:.12em}

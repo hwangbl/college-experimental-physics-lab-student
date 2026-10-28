@@ -7,7 +7,8 @@
     'newton-rings-lab-students': 'rings',
     'polarization-light-lab-students': 'polarization',
     'oscilloscope-instrument-lab-students': 'oscilloscope',
-    'hall-effect-lab-students': 'hall'
+    'hall-effect-lab-students': 'hall',
+    'spectrometer-lab-students': 'spectrometer'
   });
   const lab = repositories[location.pathname.split('/')[1]];
   // The unified platform counts its iframe only after the experiment loads.

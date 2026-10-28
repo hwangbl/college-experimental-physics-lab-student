@@ -6,7 +6,8 @@
     {id:'rings',n:'03',name:'牛顿环',en:'NEWTON’S RINGS',category:'光学',description:'走近明暗相间的干涉条纹，用精密读数测量透镜曲率。',tags:['等厚干涉','读数显微镜','图像分析'],keywords:'劈尖 干涉 环径 曲率半径'},
     {id:'polarization',n:'04',name:'光的偏振',en:'POLARIZATION OF LIGHT',category:'光学',description:'旋转偏振片、调整波片，让看不见的振动方向变得直观。',tags:['三维光路','马吕斯定律','偏振态'],keywords:'布儒斯特角 波片 线偏振 圆偏振 椭圆偏振'},
     {id:'oscilloscope',n:'05',name:'示波器的使用',en:'THE OSCILLOSCOPE',category:'电学',description:'调节真实感仪器面板，在波形与李萨如图形中读懂信号。',tags:['双通道波形','李萨如图形','频率测量'],keywords:'信号发生器 周期 校正 振幅 电压'},
-    {id:'hall',n:'06',name:'霍尔效应',en:'HALL EFFECT',category:'电学',description:'连接霍尔探头与励磁电源，从载流子的偏转理解霍尔电压与磁场测量。',tags:['霍尔电压','三维接线','磁场测量'],keywords:'霍尔效应 霍耳效应 Hall 半导体 载流子 磁感应强度 励磁电流 工作电流 换向法'}
+    {id:'hall',n:'06',name:'霍尔效应',en:'HALL EFFECT',category:'电学',description:'连接霍尔探头与励磁电源，从载流子的偏转理解霍尔电压与磁场测量。',tags:['霍尔电压','三维接线','磁场测量'],keywords:'霍尔效应 霍耳效应 Hall 半导体 载流子 磁感应强度 励磁电流 工作电流 换向法'},
+    {id:'spectrometer',n:'07',name:'分光计',en:'THE SPECTROMETER',category:'光学',description:'从自准直调节到双游标读数，测量三棱镜顶角与光栅谱线波长。',tags:['自准直调节','双游标读数','光栅测波长'],keywords:'分光计 spectrometer 三棱镜 棱镜 顶角 游标 望远镜 平行光管 汞灯 黄双线 衍射 光谱'}
   ];
   const sourceRepositories = {
     young:'young-modulus-lab-students',
@@ -14,7 +15,8 @@
     rings:'newton-rings-lab-students',
     polarization:'polarization-light-lab-students',
     oscilloscope:'oscilloscope-instrument-lab-students',
-    hall:'hall-effect-lab-students'
+    hall:'hall-effect-lab-students',
+    spectrometer:'spectrometer-lab-students'
   };
   const liveSourceOrigin='https://hwangbl.github.io';
   const useLiveSources=location.origin===liveSourceOrigin;
@@ -146,7 +148,7 @@
     captureFrameState();
   }
   function connectLabTools(openedFrame,lab) {
-    const selectors={young:['#helpBtn','#sourcesBtn'],resistance:[],rings:['#helpButton','#openSources'],polarization:[null,'[data-page="sources"]'],oscilloscope:['#help-button',null,'#reset-progress'],hall:['#help-btn']};
+    const selectors={young:['#helpBtn','#sourcesBtn'],resistance:[],rings:['#helpButton','#openSources'],polarization:[null,'[data-page="sources"]'],oscilloscope:['#help-button',null,'#reset-progress'],hall:['#help-btn'],spectrometer:['#help-button','#sources-button','#reset-progress']};
     const doc=openedFrame.contentDocument;
     for(const [index,id] of ['native-lab-help','native-lab-sources','native-lab-reset'].entries()) {
       const selector=selectors[lab.id]?.[index],target=selector&&doc?.querySelector(selector),button=$('#'+id);
@@ -165,7 +167,7 @@
     if(!frame||!currentLab)return;
     try {
       const state=frame.contentWindow.__physicsLabHubBridge?.snapshot?.();
-      const selector={young:'#progressText',resistance:'#progress-text',rings:'#progressText',polarization:'#progress-count',oscilloscope:'#progress-text',hall:'.progress-row small'}[currentLab.id];
+      const selector={young:'#progressText',resistance:'#progress-text',rings:'#progressText',polarization:'#progress-count',oscilloscope:'#progress-text',hall:'.progress-row small',spectrometer:'#progress-text'}[currentLab.id];
       const text=frame.contentDocument.querySelector(selector)?.textContent||'';
       const count=text.match(/(\d+)\s*\/\s*(\d+)/),r=records[currentLab.id];
       r.hash=validHash(frame.contentWindow.location.hash);

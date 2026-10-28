@@ -11,7 +11,8 @@
     {id:'rings',name:'牛顿环'},
     {id:'polarization',name:'光的偏振'},
     {id:'oscilloscope',name:'示波器的使用'},
-    {id:'hall',name:'霍尔效应'}
+    {id:'hall',name:'霍尔效应'},
+    {id:'spectrometer',name:'分光计'}
   ]);
   const LAB_IDS = new Set(LABS.map(lab => lab.id));
   const $ = id => document.getElementById(id);
@@ -218,7 +219,7 @@
       const response = await fetch(endpoint,{
         method:'POST',
         headers:{'Content-Type':'application/json','Authorization':`Bearer ${managementKey}`},
-        body:JSON.stringify({action:'report',from:range.from,to:range.to}),
+        body:JSON.stringify({action:'report',from:range.from,to:range.to,catalog:2}),
         credentials:'omit',
         cache:'no-store',
         redirect:'error',
